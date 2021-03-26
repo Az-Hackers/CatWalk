@@ -7,7 +7,8 @@ axios.defaults.headers.common.authorization = config.API_TOKEN;
 //  get next page helper for both questions/answers
 const getNextPage = async (url) => {
   const response = await axios.get(url);
-  return response.data.results;
+  console.log('CHECKING', response.data.rows);
+  return response.data.rows;
 };
 
 const getQuestions = async (id) => {
