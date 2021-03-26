@@ -35,6 +35,7 @@ public/app.js
 config.js
 .eslintignore
 coverage
+FEC.pem
 
 # Floobits
 .floo
