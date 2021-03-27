@@ -36,7 +36,7 @@ const Answer = ({ answer }) => {
     <span className="QA-Answer">
       <span className="QA-AnswerTitle medium">{answer.body}</span>
       <AnswerThumbnails
-        thumbnails={answer.photos}
+        // thumbnails={answer.photos}
       />
       <p className="QA-AnswerInteractive small">
         by
