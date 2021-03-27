@@ -20,8 +20,12 @@ const sendClickData = async (data) => {
 // PRODUCTS DETAIL WIDGET HELPERS
 
 const getProductData = async (id) => {
+
+  let oldUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/products/${id}`;
+  let newUrl = `http://18.216.182.85:3000/products/${id}`;
+
   try {
-    const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/products/${id}`);
+    const response = await axios.get(newUrl);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -29,8 +33,12 @@ const getProductData = async (id) => {
 };
 
 const getStyles = async (id) => {
+
+  let oldUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/products/${id}/styles`;
+  let newUrl = `http://18.216.182.85:3000/products/${id}/styles`;
+
   try {
-    const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/products/${id}/styles`);
+    const response = await axios.get(newUrl);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -38,8 +46,12 @@ const getStyles = async (id) => {
 };
 
 const getRelated = async (id) => {
+
+  let oldUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/products/${id}/related`;
+  let newUrl = `http://18.216.182.85:3000/products/${id}/related`;
+
   try {
-    const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/products/${id}/related`);
+    const response = await axios.get();
     return response.data;
   } catch (error) {
     console.log(error);
