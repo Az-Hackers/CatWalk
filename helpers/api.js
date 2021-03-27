@@ -64,7 +64,7 @@ const getRelated = async (id) => {
 const getReviews = async (page, id, sort) => {
   // console.log('from inner recursive get next page func: ', sort)
   const oldUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/?sort=${sort}&page=${page}&count=500&product_id=${id}`;
-  const newUrl = `http://18.216.182.85:3000/reviews/?product_id=${id}`;
+  const newUrl = `http://18.188.20.236:3000/reviews/?product_id=${id}`;
   // console.log(url)
   const response = await axios.get(newUrl);
   return response.data.results;
@@ -102,7 +102,7 @@ const getReviews = async (page, id, sort) => {
 
 const markHelpful = (reviewId, cb) => {
   const oldUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/${reviewId}/helpful`
-  const newUrl = `http://18.216.182.85:3000/reviews/${reviewId}/helpful`;
+  const newUrl = `http://18.188.20.236:3000/reviews/${reviewId}/helpful`;
   axios.put(newUrl)
     .then((response) => {
       cb(null, response);
@@ -125,7 +125,7 @@ const markHelpful = (reviewId, cb) => {
 const addReview = (reviewFormObj, cb) => {
   console.log('reviewFormObj:', reviewFormObj);
   const oldUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews';
-  const newUrl = 'http://18.216.182.85:3000/reviews';
+  const newUrl = 'http://18.188.20.236:3000/reviews';
   axios.post(newUrl, reviewFormObj)
     .then((response) => {
       cb(null, response);
