@@ -61,46 +61,49 @@ const getRelated = async (id) => {
 // RATINGS/REVIEWS WIDGET HELPERS
 
 //get onePage helper function
-const getNextPage = async (page, id, sort) => {
+const getReviews = async (page, id, sort) => {
   // console.log('from inner recursive get next page func: ', sort)
-  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/?sort=${sort}&page=${page}&count=500&product_id=${id}`;
+  const oldUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/?sort=${sort}&page=${page}&count=500&product_id=${id}`;
+  const newUrl = `http://18.216.182.85:3000/reviews/?product_id=${id}`;
   // console.log(url)
-  const response = await axios.get(url);
+  const response = await axios.get(newUrl);
   return response.data.results;
 };
 
-const getReviews = async (id, sort) => {
-  // console.log(sort)
+// const getReviews = async (id, sort) => {
+//   // console.log(sort)
 
-    const reviews = [];
-    let page = 0;
+//     const reviews = [];
+//     let page = 0;
 
-    try {
-      do {
-        var onePage = await getNextPage(page + 1, id, sort);
-        reviews.push(onePage);
-        page++;
-      } while (onePage.length > 0);
+//     try {
+//       do {
+//         var onePage = await getNextPage(page + 1, id, sort);
+//         reviews.push(onePage);
+//         page++;
+//       } while (onePage.length > 0);
 
-      return reviews.flat();
-    }
-    catch (error) {
-      console.log(error);
-    }
+//       return reviews.flat();
+//     }
+//     catch (error) {
+//       console.log(error);
+//     }
 
-};
+// };
 
-const getReviewsMeta = async (id) => {
-  try {
-    const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/meta?product_id=${id}`);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const getReviewsMeta = async (id) => {
+//   try {
+//     const response = await axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/meta?product_id=${id}`);
+//     return response.data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const markHelpful = (reviewId, cb) => {
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/${reviewId}/helpful`)
+  const oldUrl = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/${reviewId}/helpful`
+  const newUrl = `http://18.216.182.85:3000/reviews/${reviewId}/helpful`;
+  axios.put(newUrl)
     .then((response) => {
       cb(null, response);
     })
@@ -109,19 +112,21 @@ const markHelpful = (reviewId, cb) => {
     });
 };
 
-const reportReview = (reviewId, cb) => {
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/${reviewId}/report`)
-    .then((response) => {
-      cb(null, response);
-    })
-    .catch((err) => {
-      cb(err, null);
-    });
-};
+// const reportReview = (reviewId, cb) => {
+//   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews/${reviewId}/report`)
+//     .then((response) => {
+//       cb(null, response);
+//     })
+//     .catch((err) => {
+//       cb(err, null);
+//     });
+// };
 
 const addReview = (reviewFormObj, cb) => {
-  console.log(reviewFormObj);
-  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews', reviewFormObj)
+  console.log('reviewFormObj:', reviewFormObj);
+  const oldUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-bld/reviews';
+  const newUrl = 'http://18.216.182.85:3000/reviews';
+  axios.post(newUrl, reviewFormObj)
     .then((response) => {
       cb(null, response);
     })
@@ -135,9 +140,9 @@ module.exports = {
   getStyles,
   getRelated,
   getReviews,
-  getReviewsMeta,
+  // getReviewsMeta,
   markHelpful,
-  reportReview,
+  // reportReview,
   sendClickData,
   addReview
 };
